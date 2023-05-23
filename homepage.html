@@ -17,7 +17,7 @@
       </audio>
     </div>
     <!-- Happy Birthday -->
-    <div class="container" id="birthday">
+    <div class="container" id="birthday" class="birthday">
       <div class="row">
         <canvas id="c"></canvas>
       </div>
@@ -34,6 +34,7 @@
       // heart
       setTimeout(() => {
         document.getElementById('pinkboard').classList.add('heart-show');
+        document.getElementById('birthday').classList.add('birthday-after')
       }, "20000");
 
       var settings = {
