@@ -3,6 +3,13 @@ canvas {
 	top: 0;
 	left: 0;
 }
+.birthday{
+	transition: .3s;
+}
+.birthday-after{
+	opacity: .4;
+	transition: .3s;
+}
 p {
 	margin: 0 0;
 	position: absolute;
