@@ -6,14 +6,14 @@ var w = c.width = window.innerWidth,
 		hh = h / 2,
 		
 		opts = {
-			strings: [ 'HAPPY', 'BIRTHDAY!', 'WISHING YOU A DAY THAT IS AS SPECIAL', 'AS YOU ARE!'],
+			strings: [ 'HAPPY BIRTHDAY', 'ĐỒNG!'],
 			charSize: 30,
 			charSpacing: 35,
 			lineHeight: 40,
 			
 			cx: w / 2,
 			cy: h / 2,
-			
+
 			fireworkPrevPoints: 10,
 			fireworkBaseLineWidth: 5,
 			fireworkAddedLineWidth: 8,
@@ -61,23 +61,17 @@ function Letter( char, x, y ){
 	this.char = char;
 	this.x = x;
 	this.y = y;
-	
 	this.dx = -ctx.measureText( char ).width / 2;
 	this.dy = +opts.charSize / 2;
-	
 	this.fireworkDy = this.y - hh;
-	
 	var hue = x / calc.totalWidth * 360;
-	
 	this.color = 'hsl(hue,80%,50%)'.replace( 'hue', hue );
 	this.lightAlphaColor = 'hsla(hue,80%,light%,alp)'.replace( 'hue', hue );
 	this.lightColor = 'hsl(hue,80%,light%)'.replace( 'hue', hue );
 	this.alphaColor = 'hsla(hue,80%,50%,alp)'.replace( 'hue', hue );
-	
 	this.reset();
 }
 Letter.prototype.reset = function(){
-	
 	this.phase = 'firework';
 	this.tick = 0;
 	this.spawned = false;
@@ -87,22 +81,16 @@ Letter.prototype.reset = function(){
 	this.prevPoints = [ [ 0, hh, 0 ] ];
 }
 Letter.prototype.step = function(){
-	
 	if( this.phase === 'firework' ){
-		
 		if( !this.spawned ){
-			
 			++this.tick;
 			if( this.tick >= this.spawningTime ){
-				
 				this.tick = 0;
 				this.spawned = true;
 			}
 			
 		} else {
-			
 			++this.tick;
-			
 			var linearProportion = this.tick / this.reachTime,
 					armonicProportion = Math.sin( linearProportion * TauQuarter ),
 					
@@ -127,7 +115,6 @@ Letter.prototype.step = function(){
 				ctx.moveTo( point[ 0 ], point[ 1 ] );
 				ctx.lineTo( point2[ 0 ], point2[ 1 ] );
 				ctx.stroke();
-			
 			}
 			
 			if( this.tick >= this.reachTime ){
@@ -367,7 +354,7 @@ function anim(){
 	
 	var done = true;
 	for( var l = 0; l < letters.length; ++l ){
-		
+
 		letters[ l ].step();
 		if( letters[ l ].phase !== 'done' )
 			done = false;
@@ -383,8 +370,8 @@ function anim(){
 for( var i = 0; i < opts.strings.length; ++i ){
 	for( var j = 0; j < opts.strings[ i ].length; ++j ){
 		letters.push( new Letter( opts.strings[ i ][ j ], 
-														j * opts.charSpacing + opts.charSpacing / 2 - opts.strings[ i ].length * opts.charSize / 2,
-														i * opts.lineHeight + opts.lineHeight / 2 - opts.strings.length * opts.lineHeight / 2 ) );
+			j * opts.charSpacing + opts.charSpacing / 2 - opts.strings[ i ].length * opts.charSize / 2,
+			i * opts.lineHeight + opts.lineHeight / 2 - opts.strings.length * opts.lineHeight / 2 ) );
 	}
 }
 
@@ -394,10 +381,10 @@ window.addEventListener( 'resize', function(){
 	
 	w = c.width = window.innerWidth;
 	h = c.height = window.innerHeight;
-	
+
 	hw = w / 2;
 	hh = h / 2;
-	
+
 	ctx.font = opts.charSize + 'px Verdana';
 })
 
